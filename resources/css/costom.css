@@ -1,0 +1,10 @@
+.active {
+    background: #fff;
+    color: #047857;
+    margin-left: 20px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    border-start-start-radius: 0.5rem /* 8px */;
+    border-end-start-radius: 0.5rem /* 8px */;
+}
