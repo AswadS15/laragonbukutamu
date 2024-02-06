@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>EMAIL ADMIN</title>
+    <title>EMAIL KEPALA DIVISI</title>
 </head>
 <body>
     <div>
@@ -17,12 +17,12 @@
             <h1 >SELAMAT MALAM, {{$admin->name}}</h1>
             @endif    
             <div>
-                <p>Anda memiliki pengunjung baru, silahkan LOGIN untuk melihat detail pengunjung</p>
+                <p>Pengujung baru sedang menunggu <strong>RESPON</strong> anda, silahkan <strong>LOGIN</strong> untuk merespon permintaan Pengunjung</p>
                 <strong >Informasi Pengunjung:</strong>
                 <ul>
-                    <li><span >Nama Pengunjung:</span> {{ $pengunjung['nama'] }}</li>
-                    <li><span >Instansi:</span> {{ $pengunjung['instansi'] }}</li>
-                    <li><span >Alamat:</span> {{ $pengunjung['alamat'] }}</li>
+                    <li><span >Nama Pengunjung:</span> {{ $pengunjung->pengunjung->nama }}</li>
+                    <li><span >Instansi:</span> {{ $pengunjung->pengunjung->instansi }}</li>
+                    <li><span >Alamat:</span> {{ $pengunjung->pengunjung->alamat }}</li>
                 </ul>
             </div>
         

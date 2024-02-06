@@ -55,7 +55,7 @@ class PengunjungController extends Controller
     public function store(Request $request)
     {
 
-        $validated = $request->validate([
+        $request->validate([
             'nama' => 'required|unique:pengunjungs|max:255',
             'instansi' => 'required',
             'alamat' => 'required',
@@ -65,11 +65,16 @@ class PengunjungController extends Controller
             'tujuan' => 'required',
         ]);
 
-        $tujuanss['excerpt'] = Str::limit(strip_tags($request->tujuan), 200);
+
+
+        // $pengunjung = Pengunjung::with('tujuans', 'divisi')->get();
+
         $fromEmail = User::where('id_divisi', $request->divisi)
             ->take(1)
             ->value('email');
 
+
+        $tujuanss['excerpt'] = Str::limit(strip_tags($request->tujuan), 200);
 
         $nama = $request->nama;
         $instansi = $request->instansi;
@@ -79,8 +84,25 @@ class PengunjungController extends Controller
         $divisi = $request->divisi;
         $tujuan = $tujuanss['excerpt'];
 
+        $pengunjung = [
+            'nama' => $request->nama,
+            'instansi' => $request->instansi,
+            'alamat' => $request->alamat,
+            'hp' => $request->hp,
+            'email' => $request->email,
+            'divisi' => $request->divisi,
+            'tujuan' => $tujuan,
+        ];
 
+        $admin = User::where('id_divisi', $divisi)->first();
+        $waktu = now('Asia/Makassar')->format('H');
 
+        $pesan = [
+            'pengunjung' => $pengunjung,
+            'admin' => $admin,
+            'email' => $fromEmail,
+            'waktu' => $waktu,
+        ];
         if (Pengunjung::where('hp', $hp)->exists()) {
 
             $idpengunjung = Pengunjung::where('hp', $hp)
@@ -92,9 +114,9 @@ class PengunjungController extends Controller
             $tujuans->save();
 
 
-            KirimEmailKeKepalaDivisi::dispatch($fromEmail);
+            KirimEmailKeKepalaDivisi::dispatch($pesan);
 
-            Alert::success('Success Title', 'Success Message');
+            Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami. Selanjutnya anda bisa menunggu validasi dari ADMIN berupa pesan EMAIL.");
             return redirect('/#layanan');
         } else {
             $data = new Pengunjung();
@@ -113,27 +135,8 @@ class PengunjungController extends Controller
             $tujuans->id_pengunjungs = $idpengunjung;
             $tujuans->tujuan = $tujuan;
             $tujuans->save();
-
-            $pengunjung = [
-                'nama' => $nama,
-                'instansi' => $instansi,
-                'alamat' => $alamat,
-                'hp' => $hp,
-                'email' => $email,
-                'divisi' => $divisi,
-                'tujuan' => $tujuan,
-            ];
-            $admin = User::where('id_divisi', $divisi)->first();
-            $waktu = date('H');
-
-            $pesan = [
-                'pengunjung' => $pengunjung,
-                'admin' => $admin,
-                'email' => $fromEmail,
-                'waktu' => $waktu,
-            ];
             KirimEmailKeKepalaDivisi::dispatch($pesan);
-            Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami.");
+            Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami. Selanjutnya anda bisa menunggu validasi dari ADMIN berupa pesan EMAIL.");
             return redirect('/#layanan');
         }
     }

@@ -9,25 +9,23 @@
       </td>
       <td class="flex justify-center mt-5">
          @if ($item->status == 0)
-            <span class="cursor-pointer truncate px-2 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition duration-300">Sudah dilayani</span>
+            <a href="{{ url('change-status/'.$item->id) }}" onclick="return confirm('Apakah anda yakin ingin mengubah status pelayanan ini?')"
+               class="px-2 py-1 bg-red-500 backdrop-opacity-5 text-white rounded hover:bg-red-600 transition duration-300">Belum dilayani</a>
          @endif
          @if ($item->status == 1)
-               <form action="ubah/{{$item->id}}" method="POST" class="flex justify-center gap-2">
+               {{-- <form action="ubah/{{$item->id}}" method="POST">
                   @csrf
-                  <select id="respon" name="respon" class="block w-1/2 rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
-                     <option selected="false" disabled="disabled">Respon</option>
-                     <option value="1">Berada ditempat</option>
-                     <option value="2">Tidak berada ditempat, akan diwakilkan oleh staff Tata Usaha</option>
+                  <select id="country" name="country" autocomplete="country-name" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:max-w-xs sm:text-sm sm:leading-6">
+                     <option selected="false" disabled="disabled">United States</option>
+                     <option>Saya berada ditempat</option>
+                     <option>Saya tidak berada ditempat, sa</option>
                    </select>
-                   <button type="submit">
-                     <span class=" p-1 rounded-md text-white hover:bg-opacity-50 bg-emerald-400">kirim</span>
-                  </button>
-               </form>
-            {{-- <a href="{{ url('change-status/'.$item->id) }}" onclick="return confirm('Apakah anda yakin ingin mengubah status pelayanan ini?')"
-               class="px-2 py-1 bg-yellow-500 backdrop-opacity-5 text-white rounded hover:bg-yellow-600 transition duration-300 truncate">Menunggu respon anda</a> --}}
+               </form> --}}
+            <a href="{{ url('change-status/'.$item->id) }}" onclick="return confirm('Apakah anda yakin ingin mengubah status pelayanan ini?')"
+               class="px-2 py-1 bg-yellow-500 backdrop-opacity-5 text-white rounded hover:bg-yellow-600 transition duration-300 truncate">Menunggu respon divisi</a>
          @endif
          @if ($item->status == 2)
-            <span class="cursor-pointer truncate px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Sudah dilayani</span>
+            <span class="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition duration-300">Sudah dilayani</span>
          @endif
      </td>
 

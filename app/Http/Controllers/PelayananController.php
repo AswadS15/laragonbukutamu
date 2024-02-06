@@ -15,7 +15,7 @@ class PelayananController extends Controller
      */
     public function index()
     {
-        $pengunjung = Pengunjung::with('tujuans')->latest()->paginate(5);
+        $pengunjung = Pengunjung::with('tujuans', 'divisi')->latest()->paginate(5);
         $user = Auth::user();
 
 
