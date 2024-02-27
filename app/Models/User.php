@@ -25,6 +25,7 @@ class User extends Authenticatable
         'role',
         'photo',
         'id_divisi',
+        'status',
     ];
 
     public function divisi(): BelongsTo

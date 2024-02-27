@@ -13,18 +13,22 @@ class TujuanlSeeder extends Seeder
      */
     public function run(): void
     {
-        Tujuan::create([
-            'id_pengunjungs' => 1, // Kosongkan id_pengunjungs atau isi dengan id pengunjung yang sesuai
-            'status' => 0,
-            'tujuan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis ipsa quidem necessitatibus ',
-            'gambar' => null,
-        ]);
 
-        Tujuan::create([
-            'id_pengunjungs' => 2, // Kosongkan id_pengunjungs atau isi dengan id pengunjung yang sesuai
-            'status' => 0,
-            'tujuan' => 'aperiam vero adipisci dolore quo id non reiciendis rerum ducimus perferendis, distinctio debitis mollitia vitae tempore ratione excepturi.',
-            'gambar' => null,
-        ]);
+        \App\Models\Tujuan::factory()->count(10)->create();
+        // Tujuan::create([
+        //     'id_pengunjungs' => 1, // Kosongkan id_pengunjungs atau isi dengan id pengunjung yang sesuai
+        //     'status' => 0,
+        //     'tujuan' => 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis ipsa quidem necessitatibus ',
+        //     'gambar' => null,
+        //     'id_divisi' => 1,
+        // ]);
+
+        // Tujuan::create([
+        //     'id_pengunjungs' => 2, // Kosongkan id_pengunjungs atau isi dengan id pengunjung yang sesuai
+        //     'status' => 0,
+        //     'tujuan' => 'aperiam vero adipisci dolore quo id non reiciendis rerum ducimus perferendis, distinctio debitis mollitia vitae tempore ratione excepturi.',
+        //     'gambar' => null,
+        //     'id_divisi' => 2,
+        // ]);
     }
 }

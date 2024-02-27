@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::table('ulasans', function (Blueprint $table) {
             // Menambah kolom foreign key
-            $table->unsignedBigInteger('id_tujuan')->nullable();
+            $table->unsignedBigInteger('id_pengunjungs')->nullable();
 
             // Menambah constraint foreign key
-            $table->foreign('id_tujuan')
+            $table->foreign('id_pengunjungs')
                 ->after('id')
                 ->references('id')
-                ->on('tujuans');
+                ->on('pengunjungs');
         });
     }
 
@@ -30,10 +30,10 @@ return new class extends Migration
     {
         Schema::table('ulasans', function (Blueprint $table) {
             // Menghapus constraint foreign key
-            $table->dropForeign(['id_tujuan']);
+            $table->dropForeign(['id_pengunjungs']);
 
             // Menghapus kolom foreign key
-            $table->dropColumn('id_tujuan');
+            $table->dropColumn('id_pengunjungs');
         });
     }
 };

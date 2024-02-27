@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('id_pengunjungs');
             $table->foreign('id_pengunjungs')->references('id')->on('pengunjungs')->nullable();
+            $table->unsignedBigInteger('id_divisi');
+            $table->foreign('id_divisi')->references('id')->on('divisis')->nullable();
             $table->boolean('status')->default(0);
             $table->string('tujuan')->nullable();
-            $table->string('gambar')->nullable();
             $table->timestamps();
         });
     }

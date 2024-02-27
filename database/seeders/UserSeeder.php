@@ -20,13 +20,15 @@ class UserSeeder extends Seeder
                 'role' => 'admin',
                 'password' => bcrypt('admin123'),  // Menggunakan bcrypt untuk mengenkripsi password
                 'id_divisi' => null,
+                'status' => 'offline',
             ],
             [
                 'name' => 'pimpinan',
-                'email' => 'pimpinan@gmail.com',
+                'email' => 'aswadsupu6@gmail.com',
                 'role' => 'pimpinan',
                 'password' => bcrypt('pimpinan123'),
-                'id_divisi' => null,
+                'id_divisi' => 4,
+                'status' => 'offline',
                 // Menggunakan bcrypt untuk mengenkripsi password
             ],
             [
@@ -35,6 +37,7 @@ class UserSeeder extends Seeder
                 'role' => 'kepala divisi',
                 'password' => bcrypt('divisi123'),
                 'id_divisi' => 1,
+                'status' => 'offline',
                 // Menggunakan bcrypt untuk mengenkripsi password
             ],
             [
@@ -43,14 +46,16 @@ class UserSeeder extends Seeder
                 'role' => 'kepala divisi',
                 'password' => bcrypt('divisi123'),
                 'id_divisi' => 2,
+                'status' => 'offline',
                 // Menggunakan bcrypt untuk mengenkripsi password
             ],
             [
                 'name' => 'PKH',
-                'email' => 'moh.fikryansyah287@gmail.com',
+                'email' => 'aswadbola01@gmail.com',
                 'role' => 'kepala divisi',
                 'password' => bcrypt('divisi123'),
                 'id_divisi' => 3,
+                'status' => 'offline',
                 // Menggunakan bcrypt untuk mengenkripsi password
             ],
         ];

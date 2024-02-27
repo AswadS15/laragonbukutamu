@@ -1,5 +1,5 @@
 <aside id="logo-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen pt-16 transition-transform -translate-x-full   sm:translate-x-0 " aria-label="Sidebar">
-    <div class="h-full ps pb-4 overflow-y-auto ">
+    <div class="h-full ps pb-4 overflow-y-auto bg-emerald-700">
         <div class="  shadow-lg rounded-b-xl b bg-emerald-600 opacity-50 pb-1 pt-3 ">
             <p class="uppercase text-base text-center  text-white font-mosrat font-semibold ">Utama</p>
         </div>
@@ -23,21 +23,18 @@
             </li>           
             @endif
 
-            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'kepala divisi')
-            <li>
-                <a href="/dataPelayanan" class="{{ Str::startsWith(request()->path(), 'dataPelayanan')  ? 'active' : '' }} {{ Str::startsWith(request()->path(), 'dataPelayanan') ? '' : 'text-white' }} {{ Str::startsWith(request()->path(),'dataPelayanan') ? '' : 'opacity-75' }} flex items-center p-2  rounded-s-lg hover:bg-white group transition-all hover:ms-5  hover:opacity-100">
+            @if (auth()->user()->role == 'admin' || auth()->user()->role == 'kepala divisi' || auth()->user()->role == 'pimpinan')
+            <li class="relative group">
+                <a href="/dataPelayanan" class="{{ Str::startsWith(request()->path(), 'dataPelayanan')  ? 'active' : '' }} {{ Str::startsWith(request()->path(), 'dataPelayanan') ? '' : 'text-white' }} {{ Str::startsWith(request()->path(),'dataPelayanan') ? '' : 'opacity-75' }} flex items-center p-2  rounded-s-lg group-hover:bg-white group transition-all group-hover:ms-5  group-hover:opacity-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="group-hover:text-emerald-700 h-5 w-5" fill="currentColor"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M96 0C43 0 0 43 0 96V416c0 53 43 96 96 96H384h32c17.7 0 32-14.3 32-32s-14.3-32-32-32V384c17.7 0 32-14.3 32-32V32c0-17.7-14.3-32-32-32H384 96zm0 384H352v64H96c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16zm16 48H336c8.8 0 16 7.2 16 16s-7.2 16-16 16H144c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap text-xl font-semibold group-hover:text-emerald-700 transition-all">Data Pelayanan</span>
+                    <span class="flex-1 ms-3 whitespace-nowrap text-xl font-semibold group-hover:text-emerald-700 transition-all">Data Layanan</span>
                 </a>
+                @if ($belum >= 1)
+                    <div class=" bg-red-500 w-5 h-5 flex justify-center items-center text-white absolute top-0 translate-y-1/2 group-hover:right-4 transition-all rounded-full text-xs {{ Str::startsWith(request()->path(), 'dataPelayanan') ? 'right-4' : '' }} {{ !Str::startsWith(request()->path(), 'dataPelayanan') ? 'right-8' : '' }}">
+                        <span>{{$belum}}</span>
+                    </div>
+                @endif
             </li>             
-            @endif
-            @if (auth()->user()->role == 'admin')
-            <li>
-                <a href="/divisi" class="{{ Str::startsWith(request()->path(), 'divisi')  ? 'active' : '' }} {{ Str::startsWith(request()->path(), 'divisi') ? '' : 'text-white' }} {{ Str::startsWith(request()->path(),'divisi') ? '' : 'opacity-75' }} flex items-center p-2 rounded-s-lg hover:bg-white group transition-all hover:ms-5 hover:opacity-100">
-                    <svg xmlns="http://www.w3.org/2000/svg" class=" group-hover:text-emerald-700 h-5 w-5" fill="currentColor" viewBox="0 0 512 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M448 160H320V128H448v32zM48 64C21.5 64 0 85.5 0 112v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM448 352v32H192V352H448zM48 288c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V336c0-26.5-21.5-48-48-48H48z"/></svg>
-                    <span class="flex-1 ms-3 whitespace-nowrap text-xl font-semibold group-hover:text-emerald-700 transition-all">divisi</span>
-                </a>
-            </li>
             @endif
         </ul>
         @if (auth()->user()->role == 'admin') 

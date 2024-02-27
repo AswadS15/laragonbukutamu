@@ -4,10 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
     @vite(['resources/css/app.css', 'resources/css/costom.css', 'resources/js/app.js'])
     <link rel="stylesheet" type="text/css" href="{{ asset('https://unpkg.com/trix@2.0.8/dist/trix.css') }}">
     <script type="text/javascript" src="{{ asset('https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js') }}"></script>
-    
+    <title>Layanan Buku Tamu BPKHTK XV Gorontalo</title>
 </head>
 <style>
     #permintaan {
@@ -35,44 +36,83 @@
 <body>
     @include('sweetalert::alert')
 {{-- NAVBAR --}}
-    <nav id="myNavbar" class=" bg-emerald-700 backdrop-blur-sm fixed w-full z-20 top-0 start-0 ">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <nav id="myNavbar" class=" bg-emerald-700 backdrop-blur-sm  w-full z-20 fixed">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 overflow-scroll">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
                 <span class="self-center font-mosrat text-4xl text-white font-bold whitespace-nowrap">BPKHTL-XV</span>
             </a>
-            <div style="color: aliceblue" class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                <a href="/login"><button type="button"  class="text-white bg-emerald-400 hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-green-600 rounded-lg text-lg font-bold px-4 py-2 text-center font-popins">Login</button></a>
-                <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-sticky" aria-expanded="false">
+            <div style="color: aliceblue" class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse items-center">
+                <a href="/login"><button type="button"  class="text-white bg-emerald-400 p-2
+                     text-2xl hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all">LOGIN</button></a>
+                <button data-collapse-toggle="navbar-sticky" type="button" class="transition-all group inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-sticky" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
-                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                    <svg class="w-5 h-5 text-white group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
                     </svg>
                 </button>
             </div>
-            <div  class="items-center justify-between hidden w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0" id="menuList">
-                    <li class="{{ Str::startsWith(request()->path(), '/') ? 'hidup' : '' }}">
-                        <a href="#" class="block py-2 px-3  hover:bg-gray-100 rounded font-popins font-normal md:dark:text-green-500 hover:text-gray-700 md:p-1" aria-current="page">Home</a>
+            <div  class="items-center justify-between hidden w-full  md:flex md:w-auto md:order-1 overflow-scroll" id="navbar-sticky">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 gap-3" id="menuList">
+                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0">
+                        <a href="#" class="block py-2 px-3  text-white rounded font-popins font-normal md:dark:text-green-500 hover:text-gray-700 md:p-1" aria-current="page">Home</a>
                     </li>
-                    <li class="{{ Str::startsWith(request()->path(), '/') ? 'hidup' : '' }}">
-                        <a href="#layanan" class="block py-2 px-3 hover:text-gray-700 md:p-1  rounded font-popins font-normal  hover:bg-gray-100  md:dark:hover:text-green-500 md:dark:hover:bg-transparent">Layanan</a>
+                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0"> 
+                        <a href="#panduan" class="block py-2 px-3 font-popins font-normal rounded text-white  md:dark:hover:text-green-500 md:dark:hover:bg-transparent hover:text-gray-700 md:p-1">Panduan</a>
                     </li>
-                    <li class="{{ Str::startsWith(request()->path(), '/') ? 'hidup' : '' }}"> 
-                        <a href="#about" class="block py-2 px-3 font-popins font-normal rounded hover:bg-gray-100  md:dark:hover:text-green-500 md:dark:hover:bg-transparent hover:text-gray-700 md:p-1">About</a>
+                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0">
+                        <a href="#layanan" class="block py-2 px-3 hover:text-gray-700 md:p-1  rounded font-popins font-normal  text-white  md:dark:hover:text-green-500 md:dark:hover:bg-transparent">Layanan</a>
                     </li>
-                    {{-- <li>
-                        <a href="#" class="block py-2 px-3 font-popins font-normal  text-white rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-green-700 md:p-0 md:dark:hover:text-green-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"></a>
-                    </li> --}}
+                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0"> 
+                        <a href="#about" class="block py-2 px-3 font-popins font-normal rounded text-white  md:dark:hover:text-green-500 md:dark:hover:bg-transparent hover:text-gray-700 md:p-1">About</a>
+                    </li>
                 </ul>
+                <div class="grid-cols-2 xl:grid-cols-5 grid md:hidden pb-3 md:grid-rows-none gap-2 font-mosrat mx-5 mt-1 ">
+                    @foreach ($users as $user)
+                        <div class="cols-span-1 bg-white rounded-md shadow-md border py-3 group capitalize">
+                            <div class="py-2 flex gap-2 justify-center items-center text-xs">
+                                @if ($user->photo)
+                                    <div class="h-8 w-8 rounded-full bg-cover bg-center" style="background-image: url({{ asset('storage/profile/'. $user->photo) }})">
+
+                                    </div>
+                                @else
+                                    <img src="{{ asset('img/profil.png') }}" alt="Profile" class="h-8 w-8">
+                                @endif
+                                <div>
+                                    <p class="font-semibold text-black/70">{{$user->name}}</p>
+                                    @if ($user->id_divisi != 0)
+                                        <p class=" text-black/70">{{$user->divisi->divisi_type}}</p>
+                                    @else
+                                        <p class=" text-black/70">{{$user->role}}</p>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="flex justify-center items-center gap-1 text-xs">
+                                @if ($user->status != 'online')
+                                    <span class="h-2 w-2 rounded-full bg-gray-400 group-hover:bg-gray-300 block"></span>
+                                    <span class="text-gray-400 group-hover:text-gray-300">{{$user->status}}</span>
+                                @else
+                                    <span class="h-2 w-2 rounded-full bg-emerald-400 block"></span>
+                                    <span class="text-emerald-400 group-hover:text-emerald-300">{{$user->status}}</span>
+                                @endif
+                            </div>
+                        </div>    
+                    @endforeach
+                </div>
             </div>
         </div>
     </nav>
 {{-- NAVBAR --}}
-
+@include('home.buka1')
+@include('home.buka2')
+@include('home.buka3')
 
 {{-- SECTION 1 --}}
 @include('home.section1')
 {{-- END SECTION 1 --}} 
+
+{{-- PANDUAN --}}
+@include('home.panduan')
+{{-- END PANDUAN --}}
 
 {{-- SECTION 2 --}}
 @include('home.section2')
@@ -89,47 +129,94 @@
 {{-- FOOTER --}}
 @include('home.footer')
 {{-- END FOOTER --}}
-<script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+
+
+
+
+
+
+
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
 
 
-
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var getDataBtn = document.getElementById('getDataBtn');
+    $(document).ready(function () {
+        // Aktifkan modal saat gambar diklik
+        $('#panduan1').click(function () {
+            $('#buka1').removeClass('hidden').addClass('flex');
+        });
 
-        getDataBtn.addEventListener('click', function () {
-            var hp = document.getElementById('hp').value;
-
-            fetch('/ambil/' + hp)
-                .then(response => response.json())
-                .then(data => {
-                    // Isi formulir dengan data yang diterima dari server
-                    document.getElementById('nama').value = data.nama;
-                    document.getElementById('instansi').value = data.instansi;
-                    document.getElementById('alamat').value = data.alamat;
-                    document.getElementById('hp').value = data.hp;
-
-                    // Tambahkan atribut readonly pada elemen formulir
-                    document.getElementById('nama').readOnly = true;
-                    document.getElementById('instansi').readOnly = true;
-                    document.getElementById('alamat').readOnly = true;
-                    document.getElementById('hp').readOnly = true;
-
-                    // Isi placeholder dengan nilai yang diterima dari server
-                    document.getElementById('nama').placeholder = data.nama;
-                    document.getElementById('instansi').placeholder = data.instansi;
-                    document.getElementById('alamat').placeholder = data.alamat;
-                    document.getElementById('hp').placeholder = data.hp;
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                });
+        // Tutup modal saat tombol ditutup
+        $('#btnClose').click(function () {
+            $('#buka1').removeClass('flex').addClass('hidden');
         });
     });
+
+    $(document).ready(function () {
+        // Aktifkan modal saat gambar diklik
+        $('#panduan2').click(function () {
+            $('#buka2').removeClass('hidden').addClass('flex');
+        });
+
+        // Tutup modal saat tombol ditutup
+        $('#btnClose2').click(function () {
+            $('#buka2').removeClass('flex').addClass('hidden');
+        });
+    });
+
+    $(document).ready(function () {
+        // Aktifkan modal saat gambar diklik
+        $('#panduan3').click(function () {
+            $('#buka3').removeClass('hidden').addClass('flex');
+        });
+
+        // Tutup modal saat tombol ditutup
+        $('#btnClose3').click(function () {
+            $('#buka3').removeClass('flex').addClass('hidden');
+        });
+    });
+</script>
+<script>
+  $('#hp').on('keyup', function () {
+    // Mengambil nilai dari elemen dengan ID 'hp'
+    var value = $(this).val();
+
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+    $.ajax({
+        type: 'post',
+        url: '{{ URL::to('cekpengunjung') }}',
+        dataType: 'json',
+        data: { 'search': value },
+        success: function (data) {
+            // Memproses data yang diterima setelah permintaan berhasil
+            if (data.length > 0) {
+                // Data pengunjung ditemukan
+                var pengunjungData = data[0];
+
+                // Mengisi nilai elemen-elemen form dengan data yang diterima
+                $('#nama').val(pengunjungData.nama).prop({ readonly: true });
+                $("#instansi").val(pengunjungData.instansi).prop('readonly', true);
+                $('#alamat').val(pengunjungData.alamat).prop('readonly', true);
+                $('#email').val(pengunjungData.email).prop('readonly', true);
+            } else {
+                // Data pengunjung tidak ditemukan
+                // Mengosongkan nilai elemen-elemen form dan menghapus atribut readonly
+                $('#nama, #instansi, #alamat, #email').val('').prop('readonly', false);
+            }
+        }
+    });
+});
 </script>
 
 <script>
@@ -173,34 +260,8 @@
 
         // Inisialisasi jam pada saat halaman dimuat
         updateClock();
-    // GRAFIK
-  const ctx1 = document.getElementById('myChart');
 
-  new Chart(ctx1, {
-    type: 'doughnut',
-    data: {
-      labels: ['Hari ini', 'Minggu ini', 'Bulan ini'],
-      datasets: [{
-          label: ['Jumlah'],
-          data: [{{ $hari }}, {{ $hari2 }}, {{ $hari3 }}],
-        borderWidth: 1
-      }]
-    },
-  });
-
-  const ctx2 = document.getElementById('ulasan');
-
-  new Chart(ctx2, {
-    type: 'doughnut',
-    data: {
-      labels: ['Puas', 'Kurang Puas'],
-      datasets: [{
-          label: ['Jumlah'],
-        data: [{{ $puas }}, {{ $tidakpuas }}],
-        borderWidth: 1
-      }]
-    },
-  });
+ 
 
   document.addEventListener('DOMContentLoaded', function () {
     var navbar = document.getElementById('myNavbar');

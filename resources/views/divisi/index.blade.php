@@ -31,7 +31,6 @@
                    </td>
                    <td scope="row" class="px-6 py-4 font-semibold text-gray-900 whitespace-nowrap">
                       <div class="flex ">
-                         <a href="#" class="text-white bg-yellow-400 px-5 py-1 rounded-lg me-3" >Edit</a>
                          <form action="{{route('divisi.destroy', $item->id)}}" method="post">
                             @csrf
                             @method('delete')

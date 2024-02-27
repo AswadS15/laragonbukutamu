@@ -13,7 +13,7 @@ class Ulasan extends Model
 
     public function tujuan()
     {
-        return $this->belongsTo(Tujuan::class, 'id_tujuan');
+        return $this->belongsTo(Tujuan::class, 'id_tujuans');
     }
     public function Pengunjung()
     {

@@ -6,6 +6,7 @@ use App\Models\Pesan;
 use App\Models\Tujuan;
 use App\Models\Pengunjung;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class PelayananController extends Controller
@@ -36,12 +37,13 @@ class PelayananController extends Controller
             ->take(1)
             ->value('id');
 
-        $pelayananId = Tujuan::with('pengunjung')->where('id_pengunjungs', $pengunjungs_id)
+        $tujuans = Tujuan::with('pengunjung', 'dokumentasis')->where('id_pengunjungs', $pengunjungs_id)
             ->get();
 
 
 
-        return view('dataPelayanan/show', compact('pelayananId'));
+
+        return view('dataPelayanan/show', compact('tujuans'));
     }
 
     /**
@@ -57,7 +59,15 @@ class PelayananController extends Controller
     public function show(string $id)
     {
         $pengunjung = Pengunjung::find($id);
-        return view('pengunjung.detail', compact('pengunjung'));
+        $tujuan = Tujuan::with('pengunjung')->where('id_pengunjungs', $id)->latest()->paginate(5);
+        return view('pengunjung.detail', compact('pengunjung', 'tujuan'));
+    }
+
+    public function isiPelayanan(string $id)
+    {
+        $tujuan = Tujuan::with('pengunjung', 'dokumentasis')->where('id', $id)->first();
+
+        return view('dataPelayanan.isiPelayanan', compact('tujuan'));
     }
 
     /**

@@ -48,7 +48,7 @@
                     <select id="role" name="role" class="bg-gray-50 border border-gray-300 text-gray-500 text-lg rounded-lg focus:ring-green-600 focus:border-green-500 block w-full p-2.5" value="{{ old('divisi') }}">
                         <option selected="false" disabled="disabled" class="font-popins font-normal">Pilih Role</option>
                         @foreach ($role as $item)
-                            @if (old('role', $user->role) == $item)
+                            @if (old('role',) == $item)
                                 <option class="font-popins font-normal" value="{{$item}}">{{$item}}</option>    
                             @else
                                  <option class="font-popins font-normal" value="{{$item}}">{{$item}}</option>   

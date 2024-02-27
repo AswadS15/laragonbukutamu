@@ -171,6 +171,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        \Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -190,6 +191,7 @@ return [
 
         'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
         'PDF' => \Barryvdh\DomPDF\Facade::class,
+        'Excel' =>  \Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

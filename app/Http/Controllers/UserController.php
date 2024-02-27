@@ -72,7 +72,6 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -90,24 +89,62 @@ class UserController extends Controller
         return view('users.update', compact('user', 'role'));
     }
 
+    public function showChangeForm(string $id)
+    {
+        $user = User::where('id', $id)->first();
+
+        return view('users.showUbahPassword', compact('user'));
+    }
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email,' . $id,
-            // Sesuaikan dengan kolom lain yang ingin Anda update
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'],
+            'password' => ['required', Password::defaults(), 'confirmed'],
+        ], [
+            'current_password.required' => 'Kolom kata sandi saat ini wajib diisi.',
+            'current_password.current_password' => 'Kata sandi saat ini tidak sesuai.',
+            'password.required' => 'Kolom kata sandi baru wajib diisi.',
+            'password.confirmed' => 'Konfirmasi kata sandi baru tidak sesuai.',
         ]);
 
-        // Update data user berdasarkan ID
-        $user = User::find($id);
-        $user->name = $request->name;
-        $user->email = $request->email;
-        // Sesuaikan dengan kolom lain yang ingin Anda update
-        $user->save();
+        $request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return redirect('profile/' . auth()->user()->id)->with('success', 'Password berhasil dibuah');
     }
+
+
+
+    // protected function validatePassword(Request $request)
+    // {
+    //     $currentPassword = $request->input('current_password');
+    //     $newPassword = $request->input('password');
+
+    //     // Contoh validasi manual
+    //     if (empty($currentPassword) || empty($newPassword)) {
+    //         abort(422, 'Silakan masukkan password saat ini dan password baru.');
+    //     }
+
+    //     // Contoh validasi password saat ini sesuai atau tidak
+    //     if (!Hash::check($currentPassword, $request->user()->password)) {
+    //         abort(422, 'Password saat ini tidak sesuai.');
+    //     }
+
+    //     // Contoh validasi panjang password baru
+    //     if (strlen($newPassword) < 8) {
+    //         abort(422, 'Password baru harus minimal 8 karakter.');
+    //     }
+
+    //     // Anda dapat menambahkan validasi tambahan sesuai kebutuhan
+
+    //     // Jika semua validasi berhasil, lanjutkan
+    // }
+
 
     /**
      * Remove the specified resource from storage.
@@ -126,7 +163,7 @@ class UserController extends Controller
             // Hitung jumlah total user
             $totalPimpinan = User::where('role', 'pimpinan')->count();
             $totalAdmin = User::where('role', 'admin')->count();
-            $totalKepalaDivisi = User::where('role', 'admin')->count();
+            $totalKepalaDivisi = User::where('role', 'kepala divisi')->count();
 
             if ($totalPimpinan > 1 || $totalAdmin > 1 || $totalKepalaDivisi > 1) {
                 // Hapus user jika jumlah user lebih dari satu
@@ -158,7 +195,7 @@ class UserController extends Controller
         $extensi = $file->Extension();
         $ubah = time() . rand(100, 999) . "." . $extensi;
 
-        $file->move(public_path() . '/storage/img/profile', $ubah);
+        $file->storeAs('public/profile', $ubah);
 
 
 
@@ -175,7 +212,7 @@ class UserController extends Controller
     {
         // Menghapus gambar
         $user = User::find($id);
-        Storage::delete('img/profile/', $user->photo);
+        Storage::disk('public')->delete('profile/' . $user->photo);
         // $a = Storage::putFile('img/profile/', $user->photo);
         // dd($a);
 

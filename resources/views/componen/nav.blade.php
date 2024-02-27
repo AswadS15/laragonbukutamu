@@ -15,7 +15,7 @@
                   <button type="button" class="flex text-sm bg-gray-800 rounded-full focus:ring-4 focus:ring-gray-300" aria-expanded="false" data-dropdown-toggle="dropdown-user">
                     <span class="sr-only">Open user menu</span>
                     @if (auth()->user()->photo != null)
-                      <div class="h-8 w-8 bg-red-500 rounded-full bg-cover bg-center" style="background-image: url({{ asset('storage/img/profile/'. auth()->user()->photo) }})">
+                      <div class="h-8 w-8 bg-red-500 rounded-full bg-cover bg-center" style="background-image: url({{ asset('storage/profile/'. auth()->user()->photo) }})">
                       </div>
                     @else
                       <img class="w-8 h-8 rounded-full" src="{{ asset('img/profil.png') }}" alt="user photo">  
@@ -42,5 +42,5 @@
                 </div>
               </div>
           </div>
-</nav>ggfj
+</nav>
 

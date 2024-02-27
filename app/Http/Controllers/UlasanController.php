@@ -18,10 +18,10 @@ class UlasanController extends Controller
      */
     public function index()
     {
-        $puas = Ulasan::where('reaksi', 'puas')->count();
-        $tidakpuas = Ulasan::where('reaksi', 'tidak puas')->count();
+        // $puas = Ulasan::where('reaksi', 'puas')->count();
+        // $tidakpuas = Ulasan::where('reaksi', 'tidak puas')->count();
 
-        return view('ulasan.index', compact('puas', 'tidakpuas'));
+        return view('ulasan.index');
     }
 
     /**
@@ -41,27 +41,25 @@ class UlasanController extends Controller
             ->value('id');
 
 
-        $tujuan = Tujuan::with('ulasan')->where('id_pengunjungs', $pengunjungs_id)->get();
+        $ulasan = Ulasan::with('pengunjung')->where('id_pengunjungs', $pengunjungs_id)->get();
 
-        return view('ulasan/show', compact('tujuan'));
+        return view('ulasan/show', compact('ulasan'));
     }
 
-    public function simpanUlasan(Request $request)
+    public function simpanUlasan(Request $request, $id)
     {
+        $ulasans = Ulasan::where('id_pengunjungs', $id)->first();
 
+        if ($ulasans) {
+            $ulasans->reaksi = $request->reaksi;
+            $ulasans->ulasan = $request->ulasan;
 
-        $isiUlasan = new  Ulasan;
-
-        $isiUlasan->reaksi = $request->reaksi;
-        $isiUlasan->ulasan = $request->ulasan;
-        $isiUlasan->id_tujuan = $request->id;
-
-        $isiUlasan->save();
-
-
-
-        Alert::success('Berhasil', 'Terimakasih Telah Mengisi Ulasan');
-        return redirect('/');
+            $ulasans->save();
+            return redirect('/')->with('success', 'Ulasan berhasil ditambahkan');
+        } else {
+            // Lakukan sesuatu jika $ulasan tidak ditemukan
+            return redirect()->back()->with('error', 'Ulasan tidak ditemukan');
+        }
     }
 
     /**

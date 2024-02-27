@@ -6,6 +6,7 @@ use App\Models\Upload;
 use App\Models\Pengunjung;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\PesanController;
 use App\Http\Controllers\DivisiController;
 use App\Http\Controllers\TujuanController;
@@ -14,8 +15,8 @@ use App\Http\Controllers\UploadController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PelayananController;
 use App\Http\Controllers\PengunjungController;
+use App\Http\Controllers\Auth\PasswordController;
 use App\Http\Controllers\downloadTujuanController;
-use App\Http\Controllers\UserController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -37,23 +38,26 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 //     return view('downloadPdf/viewDetail');
 // });
 Route::resource('/', PengunjungController::class);
+Route::post('/cekpengunjung', [PengunjungController::class, 'cekpengunjung'])->name('cekpengunjung');
 
 
 Route::middleware(['auth', 'AdminPimpinan'])->group(function () {
     Route::resource('dashboard', DashboardController::class);
     Route::resource('dataPengunjung', PelayananController::class);
     Route::resource('dataPelayanan', TujuanController::class);
+    Route::delete('deletedimg/{id}', [UploadController::class, 'deleteImage'])->name('deleteimg');
     Route::post('/dataPelayanan/{id}/upload', [UploadController::class, 'uploadGambar'])->name('upload');
     Route::get('/downloadDataPelayanan', [downloadTujuanController::class, 'downloadDataPelayanan'])->name('downloadDataPelayanan');
     Route::get('/viewPdf', [downloadTujuanController::class, 'index'])->name('viewPdef');
-    Route::get('change-status/{id}', [TujuanController::class, 'changeStatus']);
-    Route::post('ubah/{id}', [TujuanController::class, 'ubah']);
+    Route::post('/export-DataPengunjung', [downloadTujuanController::class, 'exportDataPengunjung'])->name('exportDataPengunjung');
     Route::resource('divisi', DivisiController::class);
     Route::resource('users', UserController::class);
     Route::post('send-whatsapp', [UserController::class, 'sendwhatsapp'])->name('send-whatsapp');
     Route::get('profile/{id}', [UserController::class, 'profileshow'])->name('profileshow');
     Route::post('addprofile/{id}', [UserController::class, 'addprofile'])->name('addprofile');
     Route::delete('hapusprofil/{id}', [UserController::class, 'hapusprofil'])->name('hapusprofil');
+    Route::get('/change-password/{id}', [UserController::class, 'showChangeForm'])->name('change-password-show');
+    Route::post('/change-password', [UserController::class, 'update'])->name('change-password');
 });
 
 
@@ -65,21 +69,23 @@ Route::get('/downloadPengunjung', [downloadTujuanController::class, 'downloadPen
 // PDF DATA PELAYANAN
 Route::get('/getPelayanan', [downloadTujuanController::class, 'getPelayanan'])->name('getPelayanan');
 Route::get('/downloadPelayanan', [downloadTujuanController::class, 'downloadPelayanan'])->name('downloadPelayanan');
+// pdf report
+Route::get('/downloadRepord', [DashboardController::class, 'report'])->name('downloadReport');
 
 
+Route::get('downloadImg/{id}', [UploadController::class, 'downloadImg'])->name('downloadImg/{id}');
 Route::middleware('guest')->group(function () {
     Route::get('/ambil/{hp}', [Pengunjung::class, 'ambil'])->name('ambil');
     Route::post('showPelayanan', [PelayananController::class, 'showPelayanan'])->name('showPelayanan');
+    Route::get('isiPelayanan/{id}', [PelayananController::class, 'isiPelayanan'])->name('isiPelayanan');
 });
 // Pengunjung Quest
-Route::get('/ulasan', [UlasanController::class, 'index']);
-Route::post('showulasan', [UlasanController::class, 'showUlasan'])->name('showulasan');
-Route::post('simpan_ulasan', [UlasanController::class, 'simpanUlasan'])->name('simpan_ulasan');
+Route::get('ulasan', [UlasanController::class, 'index']);
+Route::any('showulasan', [UlasanController::class, 'showUlasan'])->name('showulasan');
+Route::post('simpan_ulasan/{id}', [UlasanController::class, 'simpanUlasan'])->name('simpan_ulasan');
 
-Route::get('logout', function () {
-    Auth::logout();
-    return redirect('');
-});
+
+
 
 
 require __DIR__ . '/auth.php';

@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\KirimEmailAdmin;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use App\Jobs\KirimEmailKeKepalaDivisi;
 use App\Events\ServiceRequestSubmitted;
@@ -28,15 +29,11 @@ class PengunjungController extends Controller
      */
     public function index()
     {
-        $hari = Pengunjung::whereDate('created_at', today())->count();
-        $hari2 = Pengunjung::whereBetween('created_at', [now()->startOfWeek(), now()->endOfWeek()])->count();
-        $hari3 = Pengunjung::whereMonth('created_at', now())->count();
-        $puas = Ulasan::where('reaksi', 'puas')->count();
-        $tidakpuas = Ulasan::where('reaksi', 'kurang puas')->count();
+        $users = User::with('divisi')->get();
         $pelayanan = Pengunjung::all();
         $divisi = Divisi::all();
 
-        return view('home.index', compact('hari', 'hari2', 'hari3', 'puas', 'tidakpuas', 'pelayanan', 'divisi'));
+        return view('home.index', compact('pelayanan', 'divisi', 'users'));
     }
 
     /**
@@ -55,15 +52,27 @@ class PengunjungController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'nama' => 'required|unique:pengunjungs|max:255',
-            'instansi' => 'required',
-            'alamat' => 'required',
-            'hp' => ['required', 'regex:/^(\+62|62|0)8[0-9]{8,15}$/'],
-            'email' => 'required|email|unique:pengunjungs,email|regex:/@gmail\.com$/i',
-            'divisi' => 'required',
-            'tujuan' => 'required',
-        ]);
+        if (Pengunjung::where('hp', $request->hp)->exists()) {
+            $request->validate([
+                'divisi' => 'required',
+                'tujuan' => 'required',
+
+            ]);
+        } else {
+
+            $request->validate([
+                'nama' => 'required|unique:pengunjungs|max:255',
+                'instansi' => 'required',
+                'alamat' => 'required',
+                'hp' => ['required', 'regex:/^(\+62|62|0)8[0-9]{8,15}$/'],
+                'email' => 'required|email|unique:pengunjungs,email|regex:/@gmail\.com$/i',
+                'divisi' => 'required',
+                'tujuan' => 'required',
+
+            ]);
+        }
+
+
 
 
 
@@ -110,9 +119,13 @@ class PengunjungController extends Controller
 
             $tujuans = new Tujuan();
             $tujuans->id_pengunjungs = $idpengunjung;
+            $tujuans->id_divisi = $divisi;
             $tujuans->tujuan = $tujuan;
             $tujuans->save();
 
+            $ulasan = new Ulasan();
+            $ulasan->id_pengunjungs = $idpengunjung;
+            $ulasan->save();
 
             KirimEmailKeKepalaDivisi::dispatch($pesan);
 
@@ -133,12 +146,30 @@ class PengunjungController extends Controller
                 ->value('id');
             $tujuans = new Tujuan();
             $tujuans->id_pengunjungs = $idpengunjung;
+            $tujuans->id_divisi = $divisi;
             $tujuans->tujuan = $tujuan;
             $tujuans->save();
+
+            $ulasan = new Ulasan();
+            $ulasan->id_pengunjungs = $idpengunjung;
+            $ulasan->save();
             KirimEmailKeKepalaDivisi::dispatch($pesan);
             Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami. Selanjutnya anda bisa menunggu validasi dari ADMIN berupa pesan EMAIL.");
             return redirect('/#layanan');
         }
+    }
+
+
+    public function cekpengunjung(Request $request)
+    {
+
+        $pengunjung = DB::table('pengunjungs')
+            ->where('hp', '=', $request->search)
+            ->get();
+
+        $pengunjungArray = $pengunjung->toArray();
+
+        return $pengunjungArray;
     }
 
 

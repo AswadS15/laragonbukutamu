@@ -25,6 +25,5 @@ class SimpanDataPengunjung implements ShouldQueue
      */
     public function handle(): void
     {
-        //
     }
 }

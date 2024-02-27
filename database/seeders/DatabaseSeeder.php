@@ -23,8 +23,7 @@ class DatabaseSeeder extends Seeder
             DivisiSeeder::class,
             UserSeeder::class,
             PengunjungSeeder::class,
-            TujuanlSeeder::class
-            // UlasanSeeder::class,
+            TujuanlSeeder::class,
 
         ]);
     }

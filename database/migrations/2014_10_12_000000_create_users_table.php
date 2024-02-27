@@ -18,6 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('role', ['admin', 'pimpinan', 'kepala divisi'])->default('admin');
+            $table->string('status')->default('offline');
             $table->rememberToken();
             $table->timestamps();
         });

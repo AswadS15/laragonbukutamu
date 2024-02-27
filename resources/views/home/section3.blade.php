@@ -3,7 +3,7 @@
         <div class="container mx-auto pt-20">   
             <form class="max-w-sm mx-auto" action="/showPelayanan" method="POST">
                 @csrf
-                <h1 class="text-center text-2xl text-white font-popins font-semibold pb-5">Lihat Permintaan Anda</h1>
+                <h1 class="text-center text-2xl text-white font-popins font-semibold pb-5">Lihat Layanan Anda</h1>
             <div class="relative">
                 <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
                     <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 19 18">
@@ -13,7 +13,7 @@
                 <input type="text" id="hp" name="hp" aria-describedby="helper-text-explanation" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-emerald-500 focus:border-emerald-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-emerald-500 dark:focus:border-emerald-500" placeholder="08" required>
             </div>
             <div class="flex justify-center">
-                <button type="submit" class=" mt-3 px-5 py-2 text-sm font-semibold hover:text-white font-popins text-center text-white bg-emerald-500 rounded-lg hover:bg-green-500 focus:ring-4 focus:outline-none focus:ring-emerald-300 dark:bg-emerald-600 dark:hover:bg-emerald-400 dark:focus:ring-emerald-800">Lihat</button>      
+                <button type="submit" class="col-span-1  mt-6 bg-emerald-400 text-center w-1/3 mx-auto py-1 rounded-md hover:bg-emerald-200 hover:text-emerald-700 transition-all text-white text-lg">Lihat</button>      
             </div>             
             </form>
         </div>       

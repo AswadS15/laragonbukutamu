@@ -21,4 +21,9 @@ class Divisi extends Model
     {
         return $this->hasMany(User::class, 'id_divisi', 'id');
     }
+
+    public function tujuans()
+    {
+        return $this->hasMany(Tujuan::class, 'id_divisi');
+    }
 }

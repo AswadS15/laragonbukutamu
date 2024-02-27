@@ -80,9 +80,9 @@
                 <td> {{ $loop->iteration}}</td>
                 <td>{{$item->pengunjung->nama}}</td>
                 @if ($item->status==1)
-                <td>Sudah Dilayanani</td> 
+                <td>Dilihat</td> 
                 @else
-                <td>Belum Dilayanani</td>  
+                <td>Belum dilihat</td>  
                 @endif               
                 <td>{{$item->tujuan}}</td>
                 <td>{{$item->created_at->translatedFormat('l, j F Y') }}</td>

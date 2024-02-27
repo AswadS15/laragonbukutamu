@@ -24,5 +24,9 @@ class DivisiSeeder extends Seeder
         Divisi::create(
             ['divisi_type'     => 'PKH']
         );
+
+        Divisi::create(
+            ['divisi_type'     => 'PIMPINAN']
+        );
     }
 }

@@ -21,4 +21,8 @@ class Pengunjung extends Model
     {
         return $this->hasMany(Tujuan::class, 'id_pengunjungs');
     }
+    public function ulasans()
+    {
+        return $this->hasMany(Ulasan::class, 'id_pengunjungs');
+    }
 }

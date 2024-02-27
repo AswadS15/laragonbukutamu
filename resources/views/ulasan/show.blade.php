@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css','resources/js/app.js'])
-    <title>Ulasan</title>
+    <title>Berikan Ulasan Anda</title>
 
     <style>
         #konten {
@@ -22,12 +22,13 @@
     </style>
 </head>
 <body>
+    @include('sweetalert::alert')
     <section class="bg-emerald-500 h-screen flex justify-center items-center">
         <div class=" bg-gray-100 px-20 py-10 rounded-3xl shadow-md flex-row justify-center">
             <div class="flex justify-center ">
                 <img src="{{ asset('/img/2.png') }}" width="100px" alt="Logo BPKHTL">
             </div>
-            <h1 class="pt-2 font-Rubik font-semibold text-4xl text-center">ULASAN</h1>
+            <h1 class="pt-2 font-Rubik font-semibold text-4xl text-center">Berikan Ulasan Anda</h1>
             <div class="mt-12">    
                 <div class="relative overflow-x-auto rounded-t-lg">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
@@ -45,24 +46,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tujuan as $item)
+                            @foreach ($ulasan as $item)
                             {{-- {{ dd($item); }} --}}
                 
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium font-popins text-gray-900 whitespace-nowrap dark:text-white"> 
-                                        {{ $item->pengunjung->nama }}
-
-                                       
+                                    <th scope="row" class="px-6 py-4 font-medium font-popins text-gray-900 whitespace-nowrap dark:text-white capitalize"> 
+                                        {{ $item->pengunjung->nama }}   
                                     </th>
-                                    @if ($item->ulasan != null)
+                                    @if ($item->reaksi != null)
                                     
                                     <td class="px-6 py-4">
                                         <span class="text-white p-1 rounded-xl bg-green-500">Telah Memberi Ulasan</span>
-                                    </td>  
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-popins font-normal text-blue-600  hover:text-blue-400">Lihat</a>
-                            
-                                    </td>
+                                    </td> 
+                                    <td>
+                                        <p data-modal-target="crud-modal" class="block crud text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm py-1 px-3 text-center dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800">
+                                            Berikan Ulasan
+                                        </p>
+                                    </td> 
                                     @else
                                     <td class="px-6 py-4">
                                         <span class="text-white p-1 rounded-xl bg-red-500">Belum Memberi Ulasan</span>
@@ -93,20 +93,22 @@
                                                     <!-- Modal body -->
                                                     <div class="modal-body">
                                                         
-                                                        <form class="p-4 md:p-5" action="/simpan_ulasan" method="POST" enctype="multipart/form-data" onsubmit="return submitForm()">
+                                                        <form class="p-4 md:p-5" action="{{ route('simpan_ulasan', ['id'=>$item->id_pengunjungs]) }}" method="POST">
                                                             @csrf
                                                             <input type="hidden" name="id" id="id">
-                                                            <div class="grid grid-cols-2 justify-center">
-                                                                <div class="col-span-1">
+                                                            <div class="flex gap-7 justify-center items-center mb-10 mt-5">
+                                                                <div>
+                                                                    <h1 class="text-emerald-700/70 text-xl font-semibold text-center pb-5">Puas</h1>
                                                                     <label>
                                                                         <input type="radio" name="reaksi" value="puas" style="display: none;">
-                                                                        <img src="{{ asset('img/suka.gif') }}" alt="Suka" id="sukaImage" class="reaction-image" onclick="selectReaction('puas')">
+                                                                        <img width="100px" src="{{ asset('img/suka.gif') }}" alt="Suka" id="sukaImage" class="reaction-image" onclick="selectReaction('puas')">
                                                                     </label>
                                                                 </div>
-                                                                <div class="col-span-1">
+                                                                <div>
+                                                                    <h1 class="text-emerald-700/70 text-xl font-semibold text-center pb-5">Kurang Puas</h1>
                                                                     <label>
                                                                         <input type="radio" name="reaksi" value="kurang puas" style="display: none;">
-                                                                        <img src="{{ asset('img/tidaksuka.gif') }}" alt="Tidak Suka" width="170px" class="pt-2 transition-all reaction-image" id="tidakSukaImage" onclick="selectReaction('kurang puas')">
+                                                                        <img src="{{ asset('img/tidaksuka.gif') }}" alt="Tidak Suka" width="100px" class="transition-all reaction-image mx-auto" id="tidakSukaImage" onclick="selectReaction('kurang puas')">
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -128,9 +130,9 @@
                                                                     </div>
         
                                                                     <div class="flex items-center mb-4">
-                                                                        <input id="country-option-3" type="radio" name="ulasan" value="Tidak responsif dengan keluahan pengunjung" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
+                                                                        <input id="country-option-3" type="radio" name="ulasan" value="Tidak responsif dengan keluhan pengunjung" class="w-4 h-4 border-gray-300 focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-600 dark:bg-gray-700 dark:border-gray-600">
                                                                         <label for="country-option-3" class="block ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">
-                                                                        Tidak responsif dengan keluahan pengunjung
+                                                                        Tidak responsif dengan keluhan pengunjung
                                                                         </label>
                                                                     </div>
         
