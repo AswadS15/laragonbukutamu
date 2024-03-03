@@ -5,14 +5,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
-    <link rel="stylesheet" href="{{ asset('build/assets/app-ec433321.css') }}">
-    <script src="{{ asset('build/assets/app-b1941ff8.js') }}"></script>
+    @vite(['resources/css/app.css','resources/js/app.js'])
+    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-ec433321.css ') }}" data-navigate-track="reload"/>
+    <script type="module" src="{{ asset('build/assets/app-b1941ff8.js') }}" data-navigate-track="reload"></script> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('https://unpkg.com/trix@2.0.8/dist/trix.css') }}">
     <script type="text/javascript" src="{{ asset('https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js') }}"></script>
     <title>Layanan Buku Tamu BPKHTK XV Gorontalo</title>
 </head>
 <style>
-    #permintaan {
+    .permintaan {
         background-image: url('{{ asset('img/1.jpeg') }}');
         background-size: cover; /* Atur ukuran gambar latar belakang */
         background-position: center; /* Posisikan gambar latar belakang di tengah */
@@ -28,9 +29,7 @@
         display: none;
     }
     .hidup {
-        background-color: rgb(243 244 246);
-        color: rgb(55 65 81 );
-        border-radius: 0.25rem
+        color: rgb(52 211 153);
     }
 
 </style>
@@ -38,13 +37,13 @@
     @include('sweetalert::alert')
 {{-- NAVBAR --}}
     <nav id="myNavbar" class=" bg-emerald-700 backdrop-blur-sm  w-full z-20 fixed">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4 overflow-scroll">
+        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
             <a href="#" class="flex items-center space-x-3 rtl:space-x-reverse">
-                <span class="self-center font-mosrat text-4xl text-white font-bold whitespace-nowrap">BPKHTL-XV</span>
+                <span class="self-center font-mosrat text-2xl xl:text-4xl md:text-3xl text-white font-bold whitespace-nowrap">BPKHTL-XV</span>
             </a>
             <div style="color: aliceblue" class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse items-center">
                 <a href="/login"><button type="button"  class="text-white bg-emerald-400 p-2
-                     text-2xl hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all">LOGIN</button></a>
+                     xl:text-2xl md:text-xl text-base hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all">LOGIN</button></a>
                 <button data-collapse-toggle="navbar-sticky" type="button" class="transition-all group inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200" aria-controls="navbar-sticky" aria-expanded="false">
                     <span class="sr-only">Open main menu</span>
                     <svg class="w-5 h-5 text-white group-hover:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 17 14">
@@ -52,53 +51,21 @@
                     </svg>
                 </button>
             </div>
-            <div  class="items-center justify-between hidden w-full  md:flex md:w-auto md:order-1 overflow-scroll" id="navbar-sticky">
-                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 gap-3" id="menuList">
-                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0">
-                        <a href="#" class="block py-2 px-3  text-white rounded font-popins font-normal md:dark:text-green-500 hover:text-gray-700 md:p-1" aria-current="page">Home</a>
+            <div  class="items-center justify-between hidden w-full  md:flex md:w-auto md:order-1" id="navbar-sticky">
+                <ul class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 gap-3  text-white" id="menuList">
+                    <li id="home" class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0">
+                        <a href="" class=" block py-2 px-3  text-white rounded font-popins font-normal  hover:text-emerald-400 md:p-1" aria-current="page">Home</a>
                     </li>
-                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0"> 
-                        <a href="#panduan" class="block py-2 px-3 font-popins font-normal rounded text-white  md:dark:hover:text-green-500 md:dark:hover:bg-transparent hover:text-gray-700 md:p-1">Panduan</a>
+                    <li id="panduan" class=" hover:bg-white hover:rounded-md md:hover:bg-opacity-0"> 
+                        <a href="" class="block py-2 px-3 font-popins font-normal rounded hover:text-emerald-400 md:p-1">Panduan</a>
                     </li>
-                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0">
-                        <a href="#layanan" class="block py-2 px-3 hover:text-gray-700 md:p-1  rounded font-popins font-normal  text-white  md:dark:hover:text-green-500 md:dark:hover:bg-transparent">Layanan</a>
+                    <li id="layanan" class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0">
+                        <a href="" class="block py-2 px-3 hover:text-emerald-400 md:p-1  rounded font-popins font-normal  ">Layanan</a>
                     </li>
-                    <li class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0"> 
-                        <a href="#about" class="block py-2 px-3 font-popins font-normal rounded text-white  md:dark:hover:text-green-500 md:dark:hover:bg-transparent hover:text-gray-700 md:p-1">About</a>
+                    <li id="about" class="hover:bg-white hover:rounded-md md:hover:bg-opacity-0"> 
+                        <a href="" class="block py-2 px-3 font-popins font-normal rounded  md:dark:hover:text-green-500 md:dark:hover:bg-transparent hover:text-emerald-400 md:p-1">About</a>
                     </li>
                 </ul>
-                <div class="grid-cols-2 xl:grid-cols-5 grid md:hidden pb-3 md:grid-rows-none gap-2 font-mosrat mx-5 mt-1 ">
-                    @foreach ($users as $user)
-                        <div class="cols-span-1 bg-white rounded-md shadow-md border py-3 group capitalize">
-                            <div class="py-2 flex gap-2 justify-center items-center text-xs">
-                                @if ($user->photo)
-                                    <div class="h-8 w-8 rounded-full bg-cover bg-center" style="background-image: url({{ asset('storage/profile/'. $user->photo) }})">
-
-                                    </div>
-                                @else
-                                    <img src="{{ asset('img/profil.png') }}" alt="Profile" class="h-8 w-8">
-                                @endif
-                                <div>
-                                    <p class="font-semibold text-black/70">{{$user->name}}</p>
-                                    @if ($user->id_divisi != 0)
-                                        <p class=" text-black/70">{{$user->divisi->divisi_type}}</p>
-                                    @else
-                                        <p class=" text-black/70">{{$user->role}}</p>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="flex justify-center items-center gap-1 text-xs">
-                                @if ($user->status != 'online')
-                                    <span class="h-2 w-2 rounded-full bg-gray-400 group-hover:bg-gray-300 block"></span>
-                                    <span class="text-gray-400 group-hover:text-gray-300">{{$user->status}}</span>
-                                @else
-                                    <span class="h-2 w-2 rounded-full bg-emerald-400 block"></span>
-                                    <span class="text-emerald-400 group-hover:text-emerald-300">{{$user->status}}</span>
-                                @endif
-                            </div>
-                        </div>    
-                    @endforeach
-                </div>
             </div>
         </div>
     </nav>
@@ -144,6 +111,32 @@
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        
+        $('#home').click(function(e) {
+                // Animasikan scroll ke posisi tinggi 750 dalam 800 milidetik
+                $('html, body').animate({ scrollTop: 0 }, 800);
+                e.preventDefault()
+            });
+        $('#layanan').click(function(e) {
+                // Animasikan scroll ke posisi tinggi 750 dalam 800 milidetik
+                $('html, body').animate({ scrollTop: 1238 }, 800);
+                e.preventDefault()
+            });
+        $('#about').click(function(e) {
+                // Animasikan scroll ke posisi tinggi 750 dalam 800 milidetik
+                $('html, body').animate({ scrollTop: 2345}, 800);
+                e.preventDefault()
+            });
+        
+        $('#panduan').click(function(e) {
+                // Animasikan scroll ke posisi tinggi 750 dalam 800 milidetik
+                $('html, body').animate({ scrollTop: 750}, 800);
+                e.preventDefault()
+            });
+    });
+</script>
 
 
 <script>

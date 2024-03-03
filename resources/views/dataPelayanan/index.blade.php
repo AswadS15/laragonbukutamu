@@ -12,7 +12,7 @@
    </div>
    <div class=" sm:rounded-lg mx-5 pt-14">
       <div class="w-full rounded-sm shadow-sm border">
-         <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+         <table class="w-full text-sm text-left rtl:text-right text-gray-500 overflow-x-auto">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50 ">
                <tr>
                      <th scope="col" class="px-6 py-3">

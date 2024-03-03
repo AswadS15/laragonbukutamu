@@ -10,7 +10,7 @@
     <div class="mt-24 w-[90%] mx-auto">
         <a href="/users/create" class="block bg-emerald-400 p-2 hover:bg-emerald-500 w-20 mb-3 text-white text-opacity-50 text-center rounded-md hover:ring-emerald-600 hover:ring-2">+ User</a>
         <div class="grid  mx-auto grid-cols-1 md:grid-cols-3  gap-3  ">
-            <div class="cols-span-1 h-[350px] overflow-scroll shadow-sm md:shadow-xl  rounded-lg border p-3 bg-emerald-200 bg-opacity-5 relative">
+            <div class="cols-span-1 h-[350px] overflow-y-auto shadow-sm md:shadow-xl  rounded-lg border p-3 bg-emerald-200 bg-opacity-5 relative">
                 <h1 class="text-center font-semibold text-xl py-3 border-b-2 text-emerald-400">Admin</h1>
                 @foreach ($admin as $item)
                 <div class=" rounded-lg  mt-3 p-3 border">
@@ -38,7 +38,7 @@
                 @endforeach
             </div>
 
-            <div class="cols-span-1 h-[350px] overflow-scroll shadow-sm md:shadow-xl  rounded-lg border p-3 bg-emerald-200 bg-opacity-5 relative">
+            <div class="cols-span-1 h-[350px] overflow-y-auto shadow-sm md:shadow-xl  rounded-lg border p-3 bg-emerald-200 bg-opacity-5 relative">
                 <h1 class="text-center font-semibold text-xl py-3 border-b-2 text-emerald-400">Kepala Divisi</h1>
                 @foreach ($kepalaDivisi as $item)
                 <div class=" rounded-lg  mt-3 p-3 border">
@@ -67,7 +67,7 @@
                 @endforeach
             </div>
 
-            <div class="cols-span-1 h-[350px] overflow-scroll shadow-sm md:shadow-xl  rounded-lg border p-3 bg-emerald-200 bg-opacity-5 relative">
+            <div class="cols-span-1 h-[350px] overflow-y-auto shadow-sm md:shadow-xl  rounded-lg border p-3 bg-emerald-200 bg-opacity-5 relative">
                 <h1 class="text-center font-semibold text-xl py-3 border-b-2 text-emerald-400">Pimpinan</h1>
                 @foreach ($pimpinan as $item)
                 <div class=" rounded-lg  mt-3 p-3 border">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -118,34 +119,6 @@ class UserController extends Controller
         return redirect('profile/' . auth()->user()->id)->with('success', 'Password berhasil dibuah');
     }
 
-
-
-    // protected function validatePassword(Request $request)
-    // {
-    //     $currentPassword = $request->input('current_password');
-    //     $newPassword = $request->input('password');
-
-    //     // Contoh validasi manual
-    //     if (empty($currentPassword) || empty($newPassword)) {
-    //         abort(422, 'Silakan masukkan password saat ini dan password baru.');
-    //     }
-
-    //     // Contoh validasi password saat ini sesuai atau tidak
-    //     if (!Hash::check($currentPassword, $request->user()->password)) {
-    //         abort(422, 'Password saat ini tidak sesuai.');
-    //     }
-
-    //     // Contoh validasi panjang password baru
-    //     if (strlen($newPassword) < 8) {
-    //         abort(422, 'Password baru harus minimal 8 karakter.');
-    //     }
-
-    //     // Anda dapat menambahkan validasi tambahan sesuai kebutuhan
-
-    //     // Jika semua validasi berhasil, lanjutkan
-    // }
-
-
     /**
      * Remove the specified resource from storage.
      */
@@ -218,5 +191,50 @@ class UserController extends Controller
 
         $user->update(['photo' => null]);
         return redirect()->back()->with('success', 'File profil berhasil dihapus.');
+    }
+
+    public function editProfile(string $id)
+    {
+        $user = User::find($id);
+        return view('users.editProfile', compact('user'));
+    }
+
+    public function updateProfile(Request $request)
+    {
+        // Validate the incoming request data
+        $request->validate([
+            'name' => [
+                'required',
+                'string',
+                'max:255',
+                Rule::unique('users')->ignore(auth()->user()->id),
+            ],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('users')->ignore(auth()->user()->id),
+            ],
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'name.string' => 'Nama harus berupa teks.',
+            'name.max' => 'Nama tidak boleh lebih dari 255 karakter.',
+            'name.unique' => 'Nama sudah digunakan oleh pengguna lain.',
+            'email.required' => 'Email wajib diisi.',
+            'email.string' => 'Email harus berupa teks.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email tidak boleh lebih dari 255 karakter.',
+            'email.unique' => 'Email sudah digunakan oleh pengguna lain.',
+        ]);
+
+        // If validation passes, update the user profile
+        $user = auth()->user();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        // Redirect back with a success message
+        return redirect()->back()->with('success', 'Profile berhasil diubah');
     }
 }

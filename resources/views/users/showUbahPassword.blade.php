@@ -30,24 +30,6 @@
                         <button class="text-white bg-emerald-400 p-2
                             hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all">Submit</button>
                     </div>
-                    {{-- @error('current_password')
-                        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-1 rounded relative" role="alert">
-                            <strong class="font-bold">Error!</strong>
-                            <span class="block sm:inline">{{ $message }}</span>
-                        </div>
-                    @enderror
-                    @error('password')
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-1 rounded relative" role="alert">
-                        <strong class="font-bold">Error!</strong>
-                        <span class="block sm:inline">{{ $message }}</span>
-                    </div>
-                    @enderror
-                    @error('password_confirmation')
-                    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-1 rounded relative" role="alert">
-                        <strong class="font-bold">Error!</strong>
-                        <span class="block sm:inline">{{ $message }}</span>
-                    </div>
-                    @enderror --}}
                 </form>
             </div>
         </div>

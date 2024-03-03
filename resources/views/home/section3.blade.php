@@ -1,4 +1,4 @@
-<section id="permintaan" class= "h-72 bg-fixed ">
+<section class= "permintaan h-72 bg-fixed ">
     <div class="bg-emerald-700 absolute h-72 w-full bg-opacity-30">
         <div class="container mx-auto pt-20">   
             <form class="max-w-sm mx-auto" action="/showPelayanan" method="POST">

@@ -24,7 +24,7 @@
 </div>    
 @endif
 
-<div class=" h-screen sm:ml-64 bg-white overflow-auto py-5 font-popins">
+<div class=" h-screen sm:ml-64 bg-white overflow-y-auto py-5 font-popins">
     <div class=" flex justify-between p-4 text-2xl text-emerald-700 font-bold bg-white  fixed z-10 top-16 w-full border-b">
         <h1>Profile</h1>
     </div>
@@ -43,6 +43,15 @@
                     
                     @if (auth()->user()->id_divisi == 1)
                         <h1 class="font-bold text-base opacity-50 text-center py-2">Kepala Divisi Tata Usaha<br> BPKHTL XV GORONTALO</h1>
+                    @endif
+                    @if (auth()->user()->id_divisi == 2)
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">Kepala Divisi ISDHTL<br> BPKHTL XV GORONTALO</h1>
+                    @endif
+                    @if (auth()->user()->id_divisi == 3)
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">Kepala Divisi PKH<br> BPKHTL XV GORONTALO</h1>
+                    @endif
+                    @if (auth()->user()->id_divisi == 4)
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">PIMPINAN<br> BPKHTL XV GORONTALO</h1>
                     @endif
                     <div class="flex justify-center py-2">
                         <a href="{{ route('change-password-show', [auth()->user()->id]) }}" class="text-white bg-emerald-400 p-2
@@ -68,6 +77,8 @@
                             <td class="p-2">{{auth()->user()->role}}</td>
                         </tr>
                     </table>
+                    <a href="{{ route('editProfile', ['id'=>auth()->user()->id]) }}" class="text-white bg-emerald-400 p-2
+                        hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all"> edit</a>
                 </div>
                 
                 {{-- <h1 class="text-black/50 font-semibold text-center text-lg uppercase py-3"></h1> --}}
@@ -90,7 +101,20 @@
                         </form>
                     </div>
                     @if (auth()->user()->role == 'admin')
-                        <h1 class="font-bold text-xs md:text-lg opacity-50 text-center py-2">Admin Layanan Buku Tamu <br> BPKHTL XV GORONTALO</h1>
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">Admin Layanan Buku Tamu <br> BPKHTL XV GORONTALO</h1>
+                    @endif
+                    
+                    @if (auth()->user()->id_divisi == 1)
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">Kepala Divisi Tata Usaha<br> BPKHTL XV GORONTALO</h1>
+                    @endif
+                    @if (auth()->user()->id_divisi == 2)
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">Kepala Divisi ISDHTL<br> BPKHTL XV GORONTALO</h1>
+                    @endif
+                    @if (auth()->user()->id_divisi == 3)
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">Kepala Divisi PKH<br> BPKHTL XV GORONTALO</h1>
+                    @endif
+                    @if (auth()->user()->id_divisi == 4)
+                        <h1 class="font-bold text-base opacity-50 text-center py-2">PIMPINAN<br> BPKHTL XV GORONTALO</h1>
                     @endif
                     <div class="flex justify-center py-2">
                         <a href="{{ route('change-password-show', [auth()->user()->id]) }}" class="text-white bg-emerald-400 p-2
@@ -98,7 +122,7 @@
                     </div>  
                 </div>
 
-                <div class="col-span-2 rounded-md shadow-md border p-5">
+                <div class="col-span-2 rounded-md shadow-md border p-5 flex flex-col justify-between">
                     <table class="text-black/70 capitalize text-sm md:text-lg w-full">
                         <tr class="border-b">
                             <td class="p-2">Nama</td>
@@ -116,6 +140,9 @@
                             <td class="p-2">{{auth()->user()->role}}</td>
                         </tr>
                     </table>
+                    <a href="{{ route('editProfile', ['id'=>auth()->user()->id]) }}" class="bg-emerald-400 text-white text-lg  hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all py-1 w-full">
+                        Edit
+                    </a>
                 </div>
             @endif
         </div>

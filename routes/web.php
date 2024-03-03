@@ -58,6 +58,8 @@ Route::middleware(['auth', 'AdminPimpinan'])->group(function () {
     Route::delete('hapusprofil/{id}', [UserController::class, 'hapusprofil'])->name('hapusprofil');
     Route::get('/change-password/{id}', [UserController::class, 'showChangeForm'])->name('change-password-show');
     Route::post('/change-password', [UserController::class, 'update'])->name('change-password');
+    Route::get('/editProfile/{id}', [UserController::class, 'editProfile'])->name('editProfile');
+    Route::post('/updateProfile}', [UserController::class, 'updateProfile'])->name('updateProfile');
 });
 
 

@@ -4,7 +4,7 @@
             <span class="group-hover:text-white/80 cursor-pointer text-white font-semibold text-lg">Close</span>
             <span class="group-hover:text-white/80 cursor-pointer text-white font-semibold text-lg">X</span>
         </div>
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div class="col-span-1">
                 <img src="{{ asset('img/ulasan.png') }}" alt="">
             </div>

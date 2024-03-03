@@ -3,7 +3,7 @@
     Dashboard
 @endsection
 @section('isi')
-  <div class="h-screen sm:ml-64 bg-white  overflow-auto py-5 pt-16 font-popins">
+  <div class="h-screen sm:ml-64 bg-white py-5 pt-16 font-popins">
     <div class=" flex p-4 justify-between  text-2xl text-emerald-700 font-bold bg-white  fixed z-10 top-16 w-full border-b">
       <h1 class="">Dashboard</h1>
       <div class="grid grid-cols-1 gap-2 md:me-64">
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-span-1 shadow-md border rounded-lg relative px-2 ">
                       <h1 class="md:text-xl xl:text-2xl text-center text-gray-400 font-bold px-3 py-6">Ulasan</h1>
-                      <div class="w-full bg-gray-50 h-[285px] border rounded-md px-2 overflow-scroll">
+                      <div class="w-full bg-gray-50 h-[285px] border rounded-md px-2 overflow-y-auto">
                         @foreach ($ulasan as $item)
                           @if ($item->reaksi)
                           

@@ -1,5 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,300;0,400;0,600;0,800;1,700&family=Roboto:wght@100;300;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap");
+.active {
+    background: #fff;
+    color: #047857;
+    margin-left: 20px;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+    border-start-start-radius: 0.5rem /* 8px */;
+    border-end-start-radius: 0.5rem /* 8px */;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

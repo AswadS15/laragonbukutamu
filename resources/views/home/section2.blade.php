@@ -1,4 +1,4 @@
-<section id="layanan" class="pb-24 bg-white pt-24"  >
+<section id="layanan" class="pb-24 bg-white pt-16"  >
     <div class="bg-gray-100 max-w-2xl mx-auto p-5 rounded-lg">
         <h3 class="text-center font-mosrat font-semibold text-3xl text-emerald-700 pb-10">LAYANAN</h3>
         <form class="max-w-xl mx-auto" method="post" action="/#layanan" autocomplete="off">

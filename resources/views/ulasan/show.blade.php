@@ -21,18 +21,18 @@
     }
     </style>
 </head>
-<body>
+<body class="bg-emerald-500">
     @include('sweetalert::alert')
-    <section class="bg-emerald-500 h-screen flex justify-center items-center">
-        <div class=" bg-gray-100 px-20 py-10 rounded-3xl shadow-md flex-row justify-center">
-            <div class="flex justify-center ">
-                <img src="{{ asset('/img/2.png') }}" width="100px" alt="Logo BPKHTL">
+    <section class="h-screen flex justify-center items-center">
+        <div class=" bg-gray-100 rounded-sm md:rounded-xl shadow-md w-[900px]">
+            <div class="flex justify-center mt-5">
+                <img src="{{ asset('/img/2.png') }}" class="w-[70px] h-[70px] md:h-[100px] md:w-[100px]" alt="Logo BPKHTL">
             </div>
-            <h1 class="pt-2 font-Rubik font-semibold text-4xl text-center">Berikan Ulasan Anda</h1>
+            <h1 class="pt-2 font-Rubik font-semibold text-2xl md:text-4xl text-center">Berikan Ulasan Anda</h1>
             <div class="mt-12">    
-                <div class="relative overflow-x-auto rounded-t-lg">
+                <div class="">
                     <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                        <thead class="text-xs text-gray-700 uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-400">
+                        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
                                     Nama
@@ -47,21 +47,18 @@
                         </thead>
                         <tbody>
                             @foreach ($ulasan as $item)
-                            {{-- {{ dd($item); }} --}}
-                
                                 <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium font-popins text-gray-900 whitespace-nowrap dark:text-white capitalize"> 
+                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white capitalize"> 
                                         {{ $item->pengunjung->nama }}   
                                     </th>
                                     @if ($item->reaksi != null)
-                                    
-                                    <td class="px-6 py-4">
-                                        <span class="text-white p-1 rounded-xl bg-green-500">Telah Memberi Ulasan</span>
+                                    <td class="px-16 py-4">
+                                        <span class="text-white p-1 rounded-xl md:text-base text-xs bg-green-500 w-full">Telah Memberi Ulasan</span> 
                                     </td> 
-                                    <td>
-                                        <p data-modal-target="crud-modal" class="block crud text-white bg-emerald-700 hover:bg-emerald-800 focus:ring-4 focus:outline-none focus:ring-emerald-300 font-medium rounded-lg text-sm py-1 px-3 text-center dark:bg-emerald-600 dark:hover:bg-emerald-700 dark:focus:ring-emerald-800">
+                                    <td class="px-6 py-4">
+                                        <button data-modal-target="crud-modal" class="">
                                             Berikan Ulasan
-                                        </p>
+                                        </button>
                                     </td> 
                                     @else
                                     <td class="px-6 py-4">
@@ -158,11 +155,10 @@
                                     </td>
                                     @endif                           
                                 </tr>
-                                
                             @endforeach
                         </tbody>
                     </table>
-                    <p id="helper-text-explanation" class=" font-popins font-normal mt-4 text-sm text-gray-500 text-center dark:text-gray-400">Silahkan Berikan ULASAN bagi kantor BPKHTL-XV agar menjadi <br>lebih baik lagi kedepannya</p>
+                    <p id="helper-text-explanation" class=" font-popins font-normal my-4 text-sm text-gray-500 text-center dark:text-gray-400">Silahkan Berikan ULASAN bagi kantor BPKHTL-XV agar menjadi <br>lebih baik lagi kedepannya</p>
                 </div>
             </div>       
         </div>
