@@ -129,8 +129,8 @@ class PengunjungController extends Controller
 
             // KirimEmailKeKepalaDivisi::dispatch($pesan);
 
-            Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami. Selanjutnya anda bisa menunggu validasi dari ADMIN berupa pesan EMAIL.");
-            return redirect('/#layanan');
+            Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami");
+            return redirect('/');
         } else {
             $data = new Pengunjung();
             $data->nama = $nama;
@@ -155,7 +155,7 @@ class PengunjungController extends Controller
             $ulasan->save();
             // KirimEmailKeKepalaDivisi::dispatch($pesan);
             Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami. Selanjutnya anda bisa menunggu validasi dari ADMIN berupa pesan EMAIL.");
-            return redirect('/#layanan');
+            return redirect('/');
         }
     }
 

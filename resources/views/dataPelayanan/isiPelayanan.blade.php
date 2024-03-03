@@ -75,7 +75,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-3 overflow-scroll mt-5 h-[245px] p-3 bg-slate-100  border rounded-md">
                     @foreach ($tujuan->dokumentasis as $item)
                     <div class="pre col-span-1" data-id="{{$item->id}}">
-                        <img class="object-cover w-[320px] h-[120px]" src="{{ asset('storage/dokumentasi/'. $item->gambar) }}" alt="">
+                        <img class="object-cover w-[320px] h-[120px]" src="{{ asset('storage/public/dokumentasi/'. $item->gambar) }}" alt="">
                     </div>
                     @endforeach
                     
