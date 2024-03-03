@@ -60,7 +60,7 @@ class UploadController extends Controller
         $filePath = 'dokumentasi/' . $dokumentasi->gambar;
 
         if (Storage::disk('public')->exists($filePath)) {
-            return response()->download(storage_path("app/public/{$filePath}"));
+            return response()->download(storage_path("app/public/public/{$filePath}"));
         } else {
             // File tidak ditemukan, berikan tanggapan kesalahan
             return response()->json(['error' => 'File not found'], 404);
