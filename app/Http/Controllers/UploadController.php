@@ -44,7 +44,7 @@ class UploadController extends Controller
 
 
         $dokumentasi = Dokumentasi::find($id);
-        Storage::disk('public')->delete('dokumentasi/' . $dokumentasi->gambar);
+        Storage::disk('public')->delete('public/dokumentasi/' . $dokumentasi->gambar);
         $dokumentasi->delete();
 
         Alert::success('Berhasil', 'Dokumentasi berhasil dihapus');

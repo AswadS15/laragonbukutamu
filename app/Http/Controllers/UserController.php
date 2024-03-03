@@ -185,7 +185,7 @@ class UserController extends Controller
     {
         // Menghapus gambar
         $user = User::find($id);
-        Storage::disk('public')->delete('profile/' . $user->photo);
+        Storage::disk('public')->delete('public/profile/' . $user->photo);
         // $a = Storage::putFile('img/profile/', $user->photo);
         // dd($a);
 
