@@ -1,5 +1,5 @@
 <section class="bg-emerald-700">  
-        <div class="grid-cols-3 xl:grid-cols-5 grid gap-5 font-mosrat place-content-center py-5">
+        <div class="container mx-auto grid-cols-3 xl:grid-cols-5 grid gap-5 font-mosrat place-content-center py-5">
             @foreach ($users as $user)
                 <div class="cols-span-1 bg-white max-w-sm rounded-md shadow-md border py-3 group capitalize">
                     <h3 class="text-center text-emerald-700 font-bold text-base">{{$user->role}}</h3>

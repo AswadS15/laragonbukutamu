@@ -204,9 +204,8 @@
                 $('#alamat').val(pengunjungData.alamat).prop('readonly', true);
                 $('#email').val(pengunjungData.email).prop('readonly', true);
             } else {
-                // Data pengunjung tidak ditemukan
-                // Mengosongkan nilai elemen-elemen form dan menghapus atribut readonly
-                $('#nama, #instansi, #alamat, #email').val('').prop('readonly', false);
+
+                $('#nama, #instansi, #alamat, #email').prop('readonly', false);
             }
         }
     });
