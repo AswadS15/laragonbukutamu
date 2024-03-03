@@ -127,7 +127,7 @@ class PengunjungController extends Controller
             $ulasan->id_pengunjungs = $idpengunjung;
             $ulasan->save();
 
-            KirimEmailKeKepalaDivisi::dispatch($pesan);
+            // KirimEmailKeKepalaDivisi::dispatch($pesan);
 
             Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami. Selanjutnya anda bisa menunggu validasi dari ADMIN berupa pesan EMAIL.");
             return redirect('/#layanan');
@@ -153,7 +153,7 @@ class PengunjungController extends Controller
             $ulasan = new Ulasan();
             $ulasan->id_pengunjungs = $idpengunjung;
             $ulasan->save();
-            KirimEmailKeKepalaDivisi::dispatch($pesan);
+            // KirimEmailKeKepalaDivisi::dispatch($pesan);
             Alert::success("Berhasil", "Terima Kasih $nama Sudah menggunakan layanan kami. Selanjutnya anda bisa menunggu validasi dari ADMIN berupa pesan EMAIL.");
             return redirect('/#layanan');
         }
