@@ -20,7 +20,7 @@
             </button>
         </div>
     </div>
-    <img src="{{ asset('storage/profile/'. auth()->user()->photo) }}" class="w-1/3" alt="">
+    <img src="{{ asset('storage/public/profile/'. auth()->user()->photo) }}" class="w-1/3" alt="">
 </div>    
 @endif
 
@@ -35,7 +35,7 @@
                     <div 
                         id="pre" 
                         class="relative hover:opacity-90 transition  w-[100px] h-[100px] mx-auto shadow-md bg-cover bg-center rounded-full "
-                        style="background-image: url({{ asset('storage/profile/'. auth()->user()->photo) }})">
+                        style="background-image: url({{ asset('storage/public/profile/'. auth()->user()->photo) }})">
                     </div>
                     @if (auth()->user()->role == 'admin')
                         <h1 class="font-bold text-base opacity-50 text-center py-2">Admin Layanan Buku Tamu <br> BPKHTL XV GORONTALO</h1>

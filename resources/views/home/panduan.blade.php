@@ -5,7 +5,7 @@
                     <h3 class="text-center text-emerald-700 font-bold text-base">{{$user->role}}</h3>
                     <div class="py-2 flex gap-2 justify-center items-center text-xs">
                         @if ($user->photo)
-                            <div class="h-8 w-8 rounded-full bg-cover bg-center" style="background-image: url({{ asset('storage/profile/'. $user->photo) }})">
+                            <div class="h-8 w-8 rounded-full bg-cover bg-center" style="background-image: url({{ asset('storage/public/profile/'. $user->photo) }})">
                             </div>
                         @else
                             <img src="{{ asset('img/profil.png') }}" alt="Profile" class="h-8 w-8">
