@@ -130,7 +130,7 @@
                 @foreach ($dokumentasis as $dokumentasi)
                     @if ($dokumentasi->gambar)
                         <div class="pre col-span-1" data-id="{{ $dokumentasi->id }}">
-                            <img class="w-[150px] h-[150px] object-cover col-span-1" src="{{ asset('storage/dokumentasi/'. $dokumentasi->gambar) }}">
+                            <img class="w-[150px] h-[150px] object-cover col-span-1" src="{{ asset('storage/profile/dokumentasi/'. $dokumentasi->gambar) }}">
                         </div>
                     @endif
                 @endforeach

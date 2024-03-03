@@ -59,8 +59,8 @@
                     </div>  
                 </div>  
                 
-                <div class="col-span-2 rounded-md shadow-md border p-5">
-                    <table class="text-black/70 capitalize text-lg w-full">
+                <div class="col-span-2 rounded-md shadow-md border p-5 flex flex-col justify-between">
+                    <table class="text-black/70 capitalize text-sm md:text-lg w-full">
                         <tr class="border-b">
                             <td class="p-2">Nama</td>
                             <td class="p-2">:</td>
@@ -77,8 +77,9 @@
                             <td class="p-2">{{auth()->user()->role}}</td>
                         </tr>
                     </table>
-                    <a href="{{ route('editProfile', ['id'=>auth()->user()->id]) }}" class="text-white bg-emerald-400 p-2
-                        hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all"> edit</a>
+                    <a href="{{ route('editProfile', ['id'=>auth()->user()->id]) }}" class="bg-emerald-400 text-white text-lg  hover:bg-emerald-200 hover:text-emerald-700 text-center font-popins rounded-md transition-all py-1 w-full">
+                        Edit
+                    </a>
                 </div>
                 
                 {{-- <h1 class="text-black/50 font-semibold text-center text-lg uppercase py-3"></h1> --}}
